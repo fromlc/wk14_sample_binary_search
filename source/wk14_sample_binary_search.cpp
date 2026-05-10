@@ -13,7 +13,7 @@
 //------------------------------------------------------------------------------
 // constants
 //------------------------------------------------------------------------------
-// Choose ONE array element type
+// Uncomment ONE array element type
 #define TYPE_INT = 1
 //#define TYPE_DOUBLE = 1
 //#define TYPE_CIRLE = 1
@@ -53,24 +53,7 @@ int binarySearch(T array[], int size, T searchValue);
 //      - the array index where passed searchValue was found, or
 //      - -1 if searchValue was not found
 //
-// Example 1: int array[] = { 0, 1, 2, 3, 4 }, searchValue = 1
-// 
-//      1) set low index to 0, high index to 4
-//              mid index is (0 + 4) / 2 = 2
-//      2) compare searchValue 1 with midpoint value 2 at array[2]
-//      3) 1 < 2 so next time only search elements before the 2
-//              same low index is 0
-//              new high index is 1
-//              new mid index is (0 + 1) / 2 = 0
-//      4) compare searchValue 1 with new midpoint value 0 at array[0]
-//      5) 1 > 0 so next time only search elements after the 0
-//              new low index is 1
-//              new high index is 1
-//              new mid index is (1 + 1) / 2 = 1
-//      6) compare searchValue 1 with new midpoint value at 1 array[1]
-//      7) 1 == 1 so searchValue is found at index mid = 1
-// 
-// Example 2: int array[] = { 0, 1, 2, 3, 4 }, searchValue = 3
+// Example: int array[] = { 0, 1, 2, 3, 4 }, searchValue = 3
 // 
 //      1) set low index to 0, high index to 4
 //              mid index is (0 + 4) / 2 = 2
