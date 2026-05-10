@@ -6,38 +6,27 @@
 // From YouTube video: https://youtu.be/vohuRrwbTT4
 // Original code on pastebin: https://pastebin.com/fsmGF1hp
 //------------------------------------------------------------------------------
-#include "Circle.h"
-
 #include <iostream>
 
 //------------------------------------------------------------------------------
 // constants
 //------------------------------------------------------------------------------
-// Choose ONE array element type
-#define TYPE_INT = 1
-//#define TYPE_DOUBLE = 1
-//#define TYPE_CIRLE = 1
-
 const int ERR_NOT_FOUND = -1;  // search value not found
 
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
-template <typename T>
-inline void displayIndexes(T array[], int low, int mid, int high);
-
-template <typename T>
-int binarySearch(T array[], int size, T searchValue);
+inline void displayIndexes(int array[], int low, int mid, int high);
+int binarySearch(int array[], int size, int searchValue);
 
 //------------------------------------------------------------------------------
 // template function binarySearch()
 //------------------------------------------------------------------------------
-// Iterative binary search in sorted array[] of type T
-//      - size parameter is number of T elements in passed array[]
+// Iterative binary search in sorted array[] of ints
+//      - size parameter is number of elements in passed array[]
 //      - searchValue parameter is value to find in array[]
 // Requirements:
 //      = array[] must be sorted in ascending order
-//      = type T must overload the ==, >, and << operators
 // 
 // Loops to compare searchValue with successive array midpoints.
 // 
@@ -50,27 +39,10 @@ int binarySearch(T array[], int size, T searchValue);
 // When low moves past high, the search stops and reports item not found.
 // 
 // Returns:
-//      - the array index where passed searchValue was found, or
-//      - -1 if searchValue was not found
+//      - array index of passed searchValue if the value was found,
+//      - ERR_NOT_FOUND otherwise
 //
-// Example 1: int array[] = { 0, 1, 2, 3, 4 }, searchValue = 1
-// 
-//      1) set low index to 0, high index to 4
-//              mid index is (0 + 4) / 2 = 2
-//      2) compare searchValue 1 with midpoint value 2 at array[2]
-//      3) 1 < 2 so next time only search elements before the 2
-//              same low index is 0
-//              new high index is 1
-//              new mid index is (0 + 1) / 2 = 0
-//      4) compare searchValue 1 with new midpoint value 0 at array[0]
-//      5) 1 > 0 so next time only search elements after the 0
-//              new low index is 1
-//              new high index is 1
-//              new mid index is (1 + 1) / 2 = 1
-//      6) compare searchValue 1 with new midpoint value at 1 array[1]
-//      7) 1 == 1 so searchValue is found at index mid = 1
-// 
-// Example 2: int array[] = { 0, 1, 2, 3, 4 }, searchValue = 3
+// Example: int array[] = { 0, 1, 2, 3, 4 }, searchValue = 3
 // 
 //      1) set low index to 0, high index to 4
 //              mid index is (0 + 4) / 2 = 2
@@ -82,8 +54,7 @@ int binarySearch(T array[], int size, T searchValue);
 //      4) compare searchValue 3 with new midpoint value 3 at array[3]
 //      5) 3 == 3 so searchValue is found at index mid = 3
 //------------------------------------------------------------------------------
-template <typename T>
-int binarySearch(T array[], int size, T searchValue)
+int binarySearch(int array[], int size, int searchValue)
 {
     std::cout << "searchValue = " << searchValue << "\n\n";
 
@@ -140,16 +111,7 @@ int binarySearch(T array[], int size, T searchValue)
 //------------------------------------------------------------------------------
 int main()
 {
-#ifdef TYPE_INT
     int a[] = { 12, 22, 34, 47, 55, 67, 82, 98 };
-#endif
-#ifdef TYPE_DOUBLE 
-    double a[] = { 12.2, 22.2, 34.2, 47.2, 55.2, 67.2, 82.2, 98.2 };
-#endif
-#ifdef TYPE_CIRCLE
-    Circle a[] = { Circle(12), Circle(22), Circle(34), Circle(47),
-                   Circle(55), Circle(67), Circle(82), Circle(98) };
-#endif
 
     std::cout << "\nBinary Search Demo Loop\n";
 
@@ -166,18 +128,8 @@ int main()
         std::cout << "\n\nEnter a value: ";
         std::cin >> userValue;
 
-#ifdef TYPE_INT
         int elements = sizeof(a) / sizeof(int);
-        int result = binarySearch<int>(a, elements, userValue);
-#endif
-#ifdef TYPE_DOUBLE
-        int elements = sizeof(a) / sizeof(double);
-        int result = binarySearch<double>(a, elements, userValue);
-#endif
-#ifdef TYPE_CIRCLE
-        int elements = sizeof(a) / sizeof(Circle);
-        int result = binarySearch<Circle>(a, elements, userValue);
-#endif
+        int result = binarySearch(a, elements, userValue);
 
         if (result >= 0)
         {
@@ -197,8 +149,7 @@ int main()
 //------------------------------------------------------------------------------
 // display infor for demo and debugging
 //------------------------------------------------------------------------------
-template <typename T>
-inline void displayIndexes(T array[], int low, int mid, int high)
+inline void displayIndexes(int array[], int low, int mid, int high)
 {
     std::cout << "low index = " << low
         << ", high index = " << high
