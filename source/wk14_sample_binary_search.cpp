@@ -6,17 +6,20 @@
 // From YouTube video: https://youtu.be/vohuRrwbTT4
 // Original code on pastebin: https://pastebin.com/fsmGF1hp
 //------------------------------------------------------------------------------
-#include "Circle.h"
 
-#include <iostream>
-
-//------------------------------------------------------------------------------
-// constants
 //------------------------------------------------------------------------------
 // Uncomment ONE array element type
+//------------------------------------------------------------------------------
 #define TYPE_INT = 1
 //#define TYPE_DOUBLE = 1
 //#define TYPE_CIRLE = 1
+
+#ifdef TYPE_CIRCLE
+#include "Circle.h"
+#endif
+
+#include <iostream>
+
 
 const int ERR_NOT_FOUND = -1;  // search value not found
 
@@ -123,15 +126,16 @@ int binarySearch(T array[], int size, T searchValue)
 //------------------------------------------------------------------------------
 int main()
 {
-#ifdef TYPE_INT
+#if defined(TYPE_INT)
     int a[] = { 12, 22, 34, 47, 55, 67, 82, 98 };
-#endif
-#ifdef TYPE_DOUBLE 
+#elif defined(TYPE_DOUBLE)
     double a[] = { 12.2, 22.2, 34.2, 47.2, 55.2, 67.2, 82.2, 98.2 };
-#endif
-#ifdef TYPE_CIRCLE
+#elif defined(TYPE_CIRCLE)
     Circle a[] = { Circle(12), Circle(22), Circle(34), Circle(47),
                    Circle(55), Circle(67), Circle(82), Circle(98) };
+#else
+    std::cout << "Uncomment a type for array elements at top of file!\n";
+    exit(0);
 #endif
 
     std::cout << "\nBinary Search Demo Loop\n";
@@ -149,15 +153,13 @@ int main()
         std::cout << "\n\nEnter a value: ";
         std::cin >> userValue;
 
-#ifdef TYPE_INT
+#if defined(TYPE_INT)
         int elements = sizeof(a) / sizeof(int);
         int result = binarySearch<int>(a, elements, userValue);
-#endif
-#ifdef TYPE_DOUBLE
+#elif defined(TYPE_DOUBLE)
         int elements = sizeof(a) / sizeof(double);
         int result = binarySearch<double>(a, elements, userValue);
-#endif
-#ifdef TYPE_CIRCLE
+#elif defined(TYPE_CIRCLE)
         int elements = sizeof(a) / sizeof(Circle);
         int result = binarySearch<Circle>(a, elements, userValue);
 #endif
@@ -178,7 +180,7 @@ int main()
 }
 
 //------------------------------------------------------------------------------
-// display infor for demo and debugging
+// display info for demo and debugging
 //------------------------------------------------------------------------------
 template <typename T>
 inline void displayIndexes(T array[], int low, int mid, int high)
