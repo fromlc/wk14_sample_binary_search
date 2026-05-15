@@ -10,9 +10,9 @@
 //------------------------------------------------------------------------------
 // Uncomment ONE array element type
 //------------------------------------------------------------------------------
-#define TYPE_INT = 1
+//#define TYPE_INT = 1
 //#define TYPE_DOUBLE = 1
-//#define TYPE_CIRLE = 1
+#define TYPE_CIRCLE = 1
 
 #ifdef TYPE_CIRCLE
 #include "Circle.h"
@@ -127,7 +127,10 @@ int binarySearch(T array[], int size, T searchValue)
 int main()
 {
 #if defined(TYPE_INT)
-    int a[] = { 12, 22, 34, 47, 55, 67, 82, 98 };
+
+    int a[] = { 12, 22, 34, 47, 49, 55, 67, 82 }; // O(n)
+    // binary search O(log n)
+
 #elif defined(TYPE_DOUBLE)
     double a[] = { 12.2, 22.2, 34.2, 47.2, 55.2, 67.2, 82.2, 98.2 };
 #elif defined(TYPE_CIRCLE)
